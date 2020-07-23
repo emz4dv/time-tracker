@@ -21,12 +21,41 @@
         <checkstyle.version>2.17</checkstyle.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <!-- https://mvnrepository.com/artifact/org.sonatype.plugins/nxrm3 -->
+    <dependencies>
+        <dependency>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nxrm3</artifactId>
+            <version>1.0.3</version>
+            <type>pom</type>
+    </dependency>
+    </dependencies>
+
     <repositories>
         <repository>
             <id>maven-all</id>
             <url>http://10.161.0.233:8081/repository/maven-all/</url>
         </repository>
     </repositories>
+
+    <profiles>
+        <id>snapshot</id>
+            <repositories>
+                <repository>
+                    <id>maven-snapshot</id>
+                    <url>http://10.161.0.233:8081/repository/maven-snapshots/</url>
+                </repository>
+            </repositories>
+    </profiles>
+    <profiles>
+        <id>release</id>
+        <repositories>
+            <repository>
+                <id>nexus-releases</id>
+                <url>http://10.161.0.233:8081/repository/maven-releases/</url>
+            </repository>
+        </repositories>
+    </profiles>
 
     <distributionManagement>
         <snapshotRepository>
@@ -57,8 +86,11 @@
                 </plugin>
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
-                    <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>1.5.1</version>
+                    <artifactId>nxrm3-maven-plugin</artifactId>
+                    <!-- replace plugin version with the latest available -->
+                    <!-- https://search.maven.org/search?q=a:nxrm3-maven-plugin -->
+                    <version>1.0.3</version>
+                    <extensions>true</extensions>
                     <executions>
                         <execution>
                             <id>default-deploy</id>
@@ -69,12 +101,18 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <serverId>nexus</serverId>
-                        <nexusUrl>http://localhost:8081/nexus/</nexusUrl>
-                        <skipStaging>true</skipStaging>
+                        <nexusUrl>http://10.161.0.233:8081/repository/maven-releases/</nexusUrl>
+
+                        <!-- The server "id" element from settings to use authentication from settings.xml-->
+                        <serverId>nexus-releases</serverId>
+
+                        <!-- Which repository to deploy to -->
+                        <repository>nexus-releases</repository>
+
+                        <!-- Skip the staging deploy mojo -->
+                        <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
                     </configuration>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>

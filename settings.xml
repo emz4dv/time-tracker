@@ -15,7 +15,6 @@
       <password>123456</password>
     </server>
   </servers>
-
   <mirrors>
     <mirror>
       <id>central</id>
