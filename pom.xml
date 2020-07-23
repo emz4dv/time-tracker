@@ -20,13 +20,32 @@
         <pmd.version>3.8</pmd.version>
         <checkstyle.version>2.17</checkstyle.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <val_1>test value</val_1>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>maven-all</id>
+            <url>http://10.161.0.233:8081/repository/maven-all/</url>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://10.161.0.233:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <url>http://10.161.0.233:8081/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
+
+</project>
+
     <modules>
         <module>core</module>
         <module>web</module>
     </modules>
-
     <build>
         <pluginManagement>
             <plugins>
