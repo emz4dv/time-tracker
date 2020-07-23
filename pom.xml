@@ -21,7 +21,7 @@
         <checkstyle.version>2.17</checkstyle.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+sdfsdfsd
     <modules>
         <module>core</module>
         <module>web</module>
