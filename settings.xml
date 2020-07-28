@@ -19,7 +19,7 @@
     <mirror>
       <id>central</id>
       <name>central</name>
-      <url>http://10.161.0.233:8081/repository/maven-all/</url>
+      <url>http://docker-01.rostov.tns-e.ru:8081/repository/maven-all/</url>
       <mirrorOf>*</mirrorOf>
     </mirror>
   </mirrors>

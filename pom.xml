@@ -4,7 +4,7 @@
     <groupId>training.taylor.time-tracker</groupId>
     <artifactId>time-tracker-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.5.0-SNAPSHOT</version>
+    <version>0.5.1</version>
     <name>Time Tracker (Parent)</name>
     <description>
         This is a simple Maven / Java web project.
@@ -34,7 +34,7 @@
     <repositories>
         <repository>
             <id>maven-all</id>
-            <url>http://10.161.0.233:8081/repository/maven-all/</url>
+            <url>http://docker-01.rostov.tns-e.ru:8081/repository/maven-all/</url>
         </repository>
     </repositories>
 
@@ -44,7 +44,7 @@
             <repositories>
                 <repository>
                     <id>maven-snapshot</id>
-                    <url>http://10.161.0.233:8081/repository/maven-snapshots/</url>
+                    <url>http://docker-01.rostov.tns-e.ru:8081/repository/maven-snapshots/</url>
                 </repository>
             </repositories>
     </profile>
@@ -53,21 +53,22 @@
         <repositories>
             <repository>
                 <id>nexus-releases</id>
-                <url>http://10.161.0.233:8081/repository/maven-releases/</url>
+                <url>http://docker-01.rostov.tns-e.ru:8081/repository/maven-releases/</url>
             </repository>
         </repositories>
     </profile>
     </profiles>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <url>http://10.161.0.233:8081/repository/maven-snapshots/</url>
-        </snapshotRepository>
         <repository>
             <id>nexus-releases</id>
-            <url>http://10.161.0.233:8081/repository/maven-releases/</url>
+            <url>http://docker-01.rostov.tns-e.ru:8081/repository/maven-releases/</url>
+	    <layout>default</layout>
         </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://docker-01.rostov.tns-e.ru:8081/repository/maven-snapshots/</url>
+	</snapshotRepository>
     </distributionManagement>
 
     <modules>
@@ -78,6 +79,7 @@
         <pluginManagement>
             <plugins>
 <!--
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
@@ -86,38 +88,7 @@
                         <skip>true</skip>
                     </configuration>
                 </plugin>
--->
-                <plugin>
-                    <groupId>org.sonatype.plugins</groupId>
-                    <artifactId>nxrm3-maven-plugin</artifactId>
-                    <!-- replace plugin version with the latest available -->
-                    <!-- https://search.maven.org/search?q=a:nxrm3-maven-plugin -->
-                    <version>1.0.3</version>
-                    <extensions>true</extensions>
-<!--
-                    <executions>
-                        <execution>
-                            <id>default-deploy</id>
-                            <phase>deploy</phase>
-                            <goals>
-                                <goal>deploy</goal>
-                            </goals>
-                        </execution>
-                    </executions>
--->
-                    <configuration>
-                        <nexusUrl>http://10.161.0.233:8081/repository/maven-releases/</nexusUrl>
-
-                        <!-- The server "id" element from settings to use authentication from settings.xml-->
-                        <serverId>nexus-releases</serverId>
-
-                        <!-- Which repository to deploy to -->
-                        <repository>nexus-releases</repository>
-
-                        <!-- Skip the staging deploy mojo -->
-                        <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
-                    </configuration>
-                </plugin>
+ -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
